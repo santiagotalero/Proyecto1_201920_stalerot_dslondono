@@ -1,0 +1,63 @@
+Requerimientos funcionales: 
+
+–Requerimiento 1: 
+-	Descripción: Consultar el tiempo promedio de viaje y su desviación estándar de los viajes entre una zona de origen y una zona destino para un mes dado. Reportar el caso especial en que No exista información al respecto.
+-	Entrada: Zona de origen, zona destino. 
+-	Salida: Tiempo promedio de viaje, desviación estándar entre los viajes. 
+-	Orden de complejidad: O(n)
+ –Requerimiento 2:
+-	Descripción: Consultar la información de los N viajes con mayor tiempo promedio para un mes dado. La información debe mostrarse ordenada de mayor a menor por el tiempo promedio de los viajes. Mostrar los resultados indicando para cada viaje su zona origen, zona destino, el tiempo promedio de viaje y su desviación estándar. 
+-	Entrada: Mes 
+-	Salida: Viajes con mayor tiempo promedio 
+-	Orden de complejidad: O(n)
+
+–Requerimiento 3: 
+-	Descripción: Comparar los tiempos promedios de los viajes para una zona dada contra cada zona X en un rango de zonas dado [Zona menor, Zona Mayor] en ambos sentidos (zona dada – zona X vs. zona X – zona dada) para un mes dado. Mostrar los resultados de comparación con cada zona X en una línea de la siguiente forma: 
+<tiempo promedio> de <Zona dada> a <Zona X> vs <tiempo promedio> de <Zona X> a <Zona dada>
+Si no hay viajes en algún sentido o en ambos entre la zona dada y una zona X debe reemplazarse <tiempo promedio> por "No hay viajes" (en el sentido respectivo). 
+-	Entrada: Zona 1, Zona 2, mes.
+-	Salida: Tiempos promedios de los viajes
+-	Orden de complejidad: O(n)
+
+–Requerimiento 4: 
+-	Descripción: Consultar el tiempo promedio de viaje y su desviación estándar de los viajes entre una zona de origen y una zona destino para un día dado de la semana. Reportar el caso especial en que No exista información al respecto. 
+-	Entrada: Zona origen, Zona destino, día de la semana. 
+-	Salida: Tiempo promedio de viaje, desviación estándar de los viajes. 
+-	Orden de complejidad: O(n)
+
+
+–Requeremiento 5: 
+-	Descripción: Consultar la información de los N viajes con mayor tiempo promedio para un día dado. La información debe mostrarse ordenada de mayor a menor por el tiempo promedio de los viajes. Mostrar los resultados indicando para cada viaje su zona origen, zona destino, el tiempo promedio de viaje y su desviación estándar. 
+-	Entrada: Día
+-	Salida: N viajes con mayor tiempo promedio; Por cada viaje la zona de origen, zona destino, tiempo promdeio de viaje y desviación estándar.
+-	Orden de complejidad: O(n)
+
+–Requerimiento 6:
+-	Descripción: Comparar los tiempos promedios de los viajes para una zona dada contra cada zona X en un rango de zonas dado [Zona menor, Zona Mayor] en ambos sentidos (zona dada – zona X vs. zona X – zona dada) para un día dado. Mostrar los resultados de comparación con cada zona X en una línea de la siguiente forma:  <tiempo promedio> de <Zona dada> a <Zona X> vs <tiempo promedio> de <Zona X> a <Zona dada.
+Si no hay viajes en alguno o en ambos sentidos entre la zona dada y una zona X debe reemplazarse <tiempo promedio> por "No hay viajes" en la dirección respectiva. 
+-	Entrada: Zona X, rango de zonas, día.
+-	Salida: Tiempo promedio del rango de zonas en un día.
+-	Orden de complejidad: O(n)
+
+–Requerimiento 7 :
+-	Descripción: Consultar los viajes entre una zona de origen y una zona destino en una franja horaria (hora inicial – hora final) dada. La franja horaria se define con horas enteras. Mostrar los viajes indicando el tiempo promedio de viaje y su desviación estándar para cada hora entera iniciando en la hora inicial y terminando en la hora final. 
+-	Entrada: Hora inicial, hora final.
+-	Salida: Tiempo promedio de los viajes, desviación estándar para cada hora entera.
+-	Orden de complejidad: O(n)
+
+
+
+–Requerimiento 8: 
+-	Descripción: Consultar la información de los N viajes con mayor tiempo promedio para una hora dada. La información debe mostrarse ordenada de mayor a menor por el tiempo promedio de los viajes. Mostrar los resultados indicando para cada viaje su zona origen, zona destino, el tiempo promedio de viaje y su desviación estándar. 
+-	Entrada: Hora
+-	Salida: Zona de origen del viaje, zona destino del viaje, tiempo promedio de viaje y su desviación estándar. 
+-	Orden de complejidad: O(n)
+
+
+
+										
+		
+
+
+
+
