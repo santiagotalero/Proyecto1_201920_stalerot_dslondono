@@ -3,36 +3,56 @@ package model.logic;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.Iterator;
 
 import com.opencsv.CSVReader;
+
+import model.data_structures.ILinkedQueue;
+import model.data_structures.IQueue;
+import model.data_structures.IStack;
+import model.data_structures.LinkedQueue;
+import model.data_structures.Queue;
+import model.data_structures.Stack;
 
 /**
  * Definicion del modelo del mundo
  *
  */
 public class MVCModelo {
+	
+	//CONSTANTES QUE REPRESENTAN CADA ESTRUCTURA DE DATOS
+	
+	private final static int LISTA_HORA=1;
+	private final static int PILA_MES=2;
+	private final static int COLA_DIA=3;
+	
+	
 	/**
 	 * Atributos del modelo del mundo
 	 */
-	//private IArregloDinamico datos;
+	private LinkedQueue listaHora;
+	private Stack pilaMes;
+	private Queue colaDia;
 	
 	/**
 	 * Constructor del modelo del mundo con capacidad predefinida
 	 */
 	public MVCModelo()
 	{
-		//datos = new ArregloDinamico(7);
+		listaHora = new LinkedQueue();
+		pilaMes= new Stack();
+		colaDia= new Queue();
 	}
 
 
 	//ALGORITMOS DE ORDENAMIENTO
 	
-	public void ordenarAscendentemente()
+	public void ordenarAscendentemente(int tipoEstructura)
 	{
 		
 	}
 	
-	public void ordenarDescendentemente()
+	public void ordenarDescendentemente(int tipoEstructura)
 	{
 		
 	}
@@ -40,27 +60,94 @@ public class MVCModelo {
 	
 	//METODOS PARA USAR EN CARGA DE ARCHIVO
 	
-	//Cambiar void por estructura a usar
-	public void viajesMes()
+	public Stack viajesMes()
 	{
-		
+		return pilaMes;
 	}
 	
-	//Cambiar void por estructura a usar
-	public void viajesHora()
+
+
+	public LinkedQueue viajesHora()
 	{
-		
+		return listaHora;
 	}
 	
-	//Cambiar void por estructura a usar
-	public void viajesDia()
+
+
+	public Queue viajesDia()
 	{
-		
+		return colaDia;
 	}
 	
 	public int zonaMenor()
 	{
-		int id=0;
+		int id=100000000;
+		
+		Iterator iter1= listaHora.iterator();
+		while(iter1.hasNext())
+		{
+			Viaje actual= (Viaje)iter1.next();
+			
+			if(actual.getSourceID()<actual.getDstID())
+			{
+				if(actual.getSourceID()<id)
+				{
+					id= actual.getSourceID();
+				}
+				
+			}
+			else
+			{
+				if(actual.getDstID()<id)
+				{
+					id= actual.getDstID();
+				}
+			}
+		}
+		
+		Iterator iter2= pilaMes.iterator();
+		while(iter2.hasNext())
+		{
+			Viaje actual= (Viaje)iter2.next();
+			
+			if(actual.getSourceID()<actual.getDstID())
+			{
+				if(actual.getSourceID()<id)
+				{
+					id= actual.getSourceID();
+				}
+				
+			}
+			else
+			{
+				if(actual.getDstID()<id)
+				{
+					id= actual.getDstID();
+				}
+			}
+		}
+		
+		Iterator iter3= colaDia.iterator();
+		while(iter3.hasNext())
+		{
+			Viaje actual= (Viaje)iter3.next();
+			
+			if(actual.getSourceID()<actual.getDstID())
+			{
+				if(actual.getSourceID()<id)
+				{
+					id= actual.getSourceID();
+				}
+				
+			}
+			else
+			{
+				if(actual.getDstID()<id)
+				{
+					id= actual.getDstID();
+				}
+			}
+		}
 		
 		return id;
 	}
@@ -68,6 +155,72 @@ public class MVCModelo {
 	public int zonaMayor()
 	{
 		int id=0;
+		
+		Iterator iter1= listaHora.iterator();
+		while(iter1.hasNext())
+		{
+			Viaje actual= (Viaje)iter1.next();
+			
+			if(actual.getSourceID()>actual.getDstID())
+			{
+				if(actual.getSourceID()>id)
+				{
+					id= actual.getSourceID();
+				}
+				
+			}
+			else
+			{
+				if(actual.getDstID()>id)
+				{
+					id= actual.getDstID();
+				}
+			}
+		}
+		
+		Iterator iter2= pilaMes.iterator();
+		while(iter2.hasNext())
+		{
+			Viaje actual= (Viaje)iter2.next();
+			
+			if(actual.getSourceID()>actual.getDstID())
+			{
+				if(actual.getSourceID()>id)
+				{
+					id= actual.getSourceID();
+				}
+				
+			}
+			else
+			{
+				if(actual.getDstID()>id)
+				{
+					id= actual.getDstID();
+				}
+			}
+		}
+		
+		Iterator iter3= colaDia.iterator();
+		while(iter3.hasNext())
+		{
+			Viaje actual= (Viaje)iter3.next();
+			
+			if(actual.getSourceID()>actual.getDstID())
+			{
+				if(actual.getSourceID()>id)
+				{
+					id= actual.getSourceID();
+				}
+				
+			}
+			else
+			{
+				if(actual.getDstID()>id)
+				{
+					id= actual.getDstID();
+				}
+			}
+		}
 		
 		return id;
 	}
@@ -84,11 +237,19 @@ public class MVCModelo {
 			
 			reader.readNext();
 
-			
-			for(String[] nextLine : reader)
+			int i=1;
+			while(i<40)
 			{
-				//ViajeHora actual= new ViajeHora(Integer.parseInt(nextLine[0]),Integer.parseInt(nextLine[1]),Integer.parseInt(nextLine[2]),Double.parseDouble(nextLine[3]),Double.parseDouble(nextLine[4]),Double.parseDouble(nextLine[5]),Double.parseDouble(nextLine[6]));
-
+				String [] nextLine= reader.readNext();
+				Viaje actual= new Viaje(Integer.parseInt(nextLine[0]),Integer.parseInt(nextLine[1]),Integer.parseInt(nextLine[2]),Double.parseDouble(nextLine[3]),Double.parseDouble(nextLine[4]),Double.parseDouble(nextLine[5]),Double.parseDouble(nextLine[6]));
+				listaHora.agregar(actual);
+				i++;
+			}
+			
+			//for(String[] nextLine : reader)
+			{
+				//Viaje actual= new Viaje(Integer.parseInt(nextLine[0]),Integer.parseInt(nextLine[1]),Integer.parseInt(nextLine[2]),Double.parseDouble(nextLine[3]),Double.parseDouble(nextLine[4]),Double.parseDouble(nextLine[5]),Double.parseDouble(nextLine[6]));
+				//listaHora.agregar(actual);
 			}
 
 		} 
@@ -104,10 +265,19 @@ public class MVCModelo {
 			reader.readNext();
 
 			
-			for(String[] nextLine : reader)
+			int i=1;
+			while(i<35)
 			{
-				//ViajeMes actual= new ViajeMes(Integer.parseInt(nextLine[0]),Integer.parseInt(nextLine[1]),Integer.parseInt(nextLine[2]),Double.parseDouble(nextLine[3]),Double.parseDouble(nextLine[4]),Double.parseDouble(nextLine[5]),Double.parseDouble(nextLine[6]));
-
+				String [] nextLine= reader.readNext();
+				Viaje actual= new Viaje(Integer.parseInt(nextLine[0]),Integer.parseInt(nextLine[1]),Integer.parseInt(nextLine[2]),Double.parseDouble(nextLine[3]),Double.parseDouble(nextLine[4]),Double.parseDouble(nextLine[5]),Double.parseDouble(nextLine[6]));
+				pilaMes.push(actual);
+				i++;
+			}
+			
+			//for(String[] nextLine : reader)
+			{
+				//Viaje actual= new Viaje(Integer.parseInt(nextLine[0]),Integer.parseInt(nextLine[1]),Integer.parseInt(nextLine[2]),Double.parseDouble(nextLine[3]),Double.parseDouble(nextLine[4]),Double.parseDouble(nextLine[5]),Double.parseDouble(nextLine[6]));
+				//pilaMes.push(actual);
 			}
 
 		} 
@@ -117,16 +287,25 @@ public class MVCModelo {
 		} 
 		try 
 		{
-			reader = new CSVReader(new FileReader("./data/bogota-cadastral-2018-"+trimestre+"-All-WeeklyAggregate.csv"));
+			reader = new CSVReader(new FileReader("./data/bogota-cadastral-2018-"+trimestre+"-WeeklyAggregate.csv"));
 
 			
 			reader.readNext();
 
 			
-			for(String[] nextLine : reader)
+			int i=1;
+			while(i<30)
 			{
-				//ViajeDia actual= new ViajeDia(Integer.parseInt(nextLine[0]),Integer.parseInt(nextLine[1]),Integer.parseInt(nextLine[2]),Double.parseDouble(nextLine[3]),Double.parseDouble(nextLine[4]),Double.parseDouble(nextLine[5]),Double.parseDouble(nextLine[6]));
-
+				String [] nextLine= reader.readNext();
+				Viaje actual= new Viaje(Integer.parseInt(nextLine[0]),Integer.parseInt(nextLine[1]),Integer.parseInt(nextLine[2]),Double.parseDouble(nextLine[3]),Double.parseDouble(nextLine[4]),Double.parseDouble(nextLine[5]),Double.parseDouble(nextLine[6]));
+				colaDia.enqueue(actual);;
+				i++;
+			}
+			
+			//for(String[] nextLine : reader)
+			{
+				//Viaje actual= new Viaje(Integer.parseInt(nextLine[0]),Integer.parseInt(nextLine[1]),Integer.parseInt(nextLine[2]),Double.parseDouble(nextLine[3]),Double.parseDouble(nextLine[4]),Double.parseDouble(nextLine[5]),Double.parseDouble(nextLine[6]));
+				//colaDia.enqueue(actual);
 			}
 
 		} 
@@ -160,16 +339,20 @@ public class MVCModelo {
 		return stats;
 	}
 	
-	//Cambiar void por estructura a usar
-	public void  req2A(int n, int mes)
-	{
 
+	public Stack  req2A(int n, int mes)
+	{
+		Stack aux= new Stack();
+		
+		return aux;
 	}
 
-	//Cambiar void por estructura a usar
-	public void req3A(int mes, int zona, int zonaMayor, int zonaMenor)
-	{
 
+	public Stack req3A(int mes, int zona, int zonaMayor, int zonaMenor)
+	{
+		Stack aux= new Stack();
+		
+		return aux;
 	}
 
 	//REQUERIMIENTOS PARTE B
@@ -183,37 +366,43 @@ public class MVCModelo {
 		return stats;
 	}
 
-	//Cambiar void por estructura a usar
-	public void  req2B(int n, int dia)
+	public Queue  req2B(int n, int dia)
 	{
-
+		Queue aux= new Queue();
+		
+		return aux;
 	}
 
-	//Cambiar void por estructura a usar
-	public void req3B(int dia, int zona, int zonaMayor, int zonaMenor)
+	public Queue req3B(int dia, int zona, int zonaMayor, int zonaMenor)
 	{
-
+		Queue aux= new Queue();
+		
+		return aux;
 	}
 	
 	
 	//REQUERIMIENTOS PARTE C
 	
-	//Cambiar void por estructura a usar
-	public void req1C(int horaInicial, int horaFinal)
+	public LinkedQueue req1C(int horaInicial, int horaFinal)
 	{
+		LinkedQueue aux= new LinkedQueue();
 		
+		return aux;
 	}
 	
-	//Cambiar void por estructura a usar
-	public void req2C(int n, int hora)
+
+	public LinkedQueue req2C(int n, int hora)
 	{
+		LinkedQueue aux= new LinkedQueue();
 		
+		return aux;
 	}
 	
-	//Cambiar void por estructura a usar
-	public void req3C(int zonaOrigen, int zonaDestino)
+	public LinkedQueue req3C(int zonaOrigen, int zonaDestino)
 	{
+		LinkedQueue aux= new LinkedQueue();
 		
+		return aux;
 	}
 
 }

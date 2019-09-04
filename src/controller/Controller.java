@@ -16,6 +16,9 @@ public class Controller {
 	/* Instancia de la Vista*/
 	private MVCView view;
 	
+	//Centinela carga archivos
+	private boolean cargaArchivos;
+	
 	/**
 	 * Crear la vista y el modelo del proyecto
 	 * @param capacidad tamaNo inicial del arreglo
@@ -24,6 +27,7 @@ public class Controller {
 	{
 		view = new MVCView();
 		modelo = new MVCModelo();
+		cargaArchivos=false;
 	}
 		
 	public void run() 
@@ -45,19 +49,19 @@ public class Controller {
 
 			view.printMenu();
 			
-			boolean cargoArchivos=false;
 
 			int option = lector.nextInt();
 			switch(option){
 			case 1:
 				
-				if(!cargoArchivos)
+				if(!cargaArchivos)
 				{
+					System.out.println("Ingrese el número de trimestre a cargar: ");
+					
 					int trimestre = lector.nextInt();
 
 					try {
 						modelo.cargarArchivo(trimestre);
-						cargoArchivos=true;
 					} catch (IOException e) {
 						e.printStackTrace();
 					}
@@ -76,6 +80,12 @@ public class Controller {
 					System.out.println("La zona con menor identificador encontrada en los archivos es: "+modelo.zonaMenor()+";\n");
 
 					System.out.println("La zona con mayor identificador encontrada en los archivos es: "+modelo.zonaMayor()+";\n");
+					
+					cargaArchivos=true;
+				}
+				else
+				{
+					System.out.println("Ya cargó archivos una vez, no puede volverlo a hacer.");
 				}
 
 				break;

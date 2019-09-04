@@ -3,7 +3,7 @@ import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 
-public class LinkedQueue<Item> implements Iterable<Item> 
+public class LinkedQueue<Item> implements ILinkedQueue,Iterable<Item> 
 {
 	/*
 	*
@@ -75,11 +75,11 @@ public class LinkedQueue<Item> implements Iterable<Item>
      * Agrega un elemento al queue
      * @param item item a agregar
      */
-    public void agregar(Item item) 
+    public void agregar(Object item) 
     {
         Node pUltimo = ultimo;
         ultimo = new Node();
-        ultimo.item = item;
+        ultimo.item = (Item)item;
         ultimo.siguiente = null;
         if (isEmpty()) primero = ultimo;
         else           pUltimo.siguiente = ultimo;
@@ -117,7 +117,7 @@ public class LinkedQueue<Item> implements Iterable<Item>
     } 
 
     // check internal invariants
-    private boolean check() 
+    public boolean check() 
     {
         if (n < 0) {
             return false;
@@ -189,20 +189,4 @@ public class LinkedQueue<Item> implements Iterable<Item>
     }
 
 
-    /**
-     * Unit tests the {@code LinkedQueue} data type.
-     *
-     * @param args the command-line arguments
-     */
-    public static void main(String[] args) {
-        LinkedQueue<String> queue = new LinkedQueue<String>();
-        while (!StdIn.isEmpty()) {
-            String item = StdIn.readString();
-            if (!item.equals("-"))
-                queue.enqueue(item);
-            else if (!queue.isEmpty())
-                StdOut.print(queue.eliminar() + " ");
-        }
-        StdOut.println("(" + queue.size() + " left on queue)");
-    }
 }
