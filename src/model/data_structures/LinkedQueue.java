@@ -183,9 +183,8 @@ public class LinkedQueue<Item> implements ILinkedQueue,Iterable<Item>
     
     public Item bottom()
     {
-    	Item x = (Item) new Node();
-    	
-    	return x;
+    	 if (isEmpty()) throw new NoSuchElementException("Desbordamiento de Queue");
+         return ultimo.item;
     }
 
 

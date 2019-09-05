@@ -237,19 +237,10 @@ public class MVCModelo {
 			
 			reader.readNext();
 
-			int i=1;
-			while(i<40)
+			for(String[] nextLine : reader)
 			{
-				String [] nextLine= reader.readNext();
 				Viaje actual= new Viaje(Integer.parseInt(nextLine[0]),Integer.parseInt(nextLine[1]),Integer.parseInt(nextLine[2]),Double.parseDouble(nextLine[3]),Double.parseDouble(nextLine[4]),Double.parseDouble(nextLine[5]),Double.parseDouble(nextLine[6]));
 				listaHora.agregar(actual);
-				i++;
-			}
-			
-			//for(String[] nextLine : reader)
-			{
-				//Viaje actual= new Viaje(Integer.parseInt(nextLine[0]),Integer.parseInt(nextLine[1]),Integer.parseInt(nextLine[2]),Double.parseDouble(nextLine[3]),Double.parseDouble(nextLine[4]),Double.parseDouble(nextLine[5]),Double.parseDouble(nextLine[6]));
-				//listaHora.agregar(actual);
 			}
 
 		} 
@@ -264,20 +255,10 @@ public class MVCModelo {
 			
 			reader.readNext();
 
-			
-			int i=1;
-			while(i<35)
+			for(String[] nextLine : reader)
 			{
-				String [] nextLine= reader.readNext();
 				Viaje actual= new Viaje(Integer.parseInt(nextLine[0]),Integer.parseInt(nextLine[1]),Integer.parseInt(nextLine[2]),Double.parseDouble(nextLine[3]),Double.parseDouble(nextLine[4]),Double.parseDouble(nextLine[5]),Double.parseDouble(nextLine[6]));
 				pilaMes.push(actual);
-				i++;
-			}
-			
-			//for(String[] nextLine : reader)
-			{
-				//Viaje actual= new Viaje(Integer.parseInt(nextLine[0]),Integer.parseInt(nextLine[1]),Integer.parseInt(nextLine[2]),Double.parseDouble(nextLine[3]),Double.parseDouble(nextLine[4]),Double.parseDouble(nextLine[5]),Double.parseDouble(nextLine[6]));
-				//pilaMes.push(actual);
 			}
 
 		} 
@@ -293,19 +274,10 @@ public class MVCModelo {
 			reader.readNext();
 
 			
-			int i=1;
-			while(i<30)
+			for(String[] nextLine : reader)
 			{
-				String [] nextLine= reader.readNext();
 				Viaje actual= new Viaje(Integer.parseInt(nextLine[0]),Integer.parseInt(nextLine[1]),Integer.parseInt(nextLine[2]),Double.parseDouble(nextLine[3]),Double.parseDouble(nextLine[4]),Double.parseDouble(nextLine[5]),Double.parseDouble(nextLine[6]));
-				colaDia.enqueue(actual);;
-				i++;
-			}
-			
-			//for(String[] nextLine : reader)
-			{
-				//Viaje actual= new Viaje(Integer.parseInt(nextLine[0]),Integer.parseInt(nextLine[1]),Integer.parseInt(nextLine[2]),Double.parseDouble(nextLine[3]),Double.parseDouble(nextLine[4]),Double.parseDouble(nextLine[5]),Double.parseDouble(nextLine[6]));
-				//colaDia.enqueue(actual);
+				colaDia.enqueue(actual);
 			}
 
 		} 
