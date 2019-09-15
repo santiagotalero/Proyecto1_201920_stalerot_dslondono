@@ -24,9 +24,9 @@ public class MVCView
 			
 			System.out.println("No puede realizar ningúna de las otras consultas sin haber cargado los datos primero. \n");
 			
-			System.out.println("Oprima 2 para , luego oprimir tecla Return: (e.g., 2):\n");
+			System.out.println("Oprima 2 para realizar una consulta tiempo promedio y desviación estándar entre una zona de origen y una zona de destino de un mes dado, luego oprimir tecla Return: (e.g., 2):\n");
 			
-			System.out.println("Oprima 3 para , luego oprimir tecla Return: (e.g., 3):\n");
+			System.out.println("Oprima 3 para realizar una consulta de los n viajes con mayor tiempo promedio de un mes dado, luego oprimir tecla Return: (e.g., 3):\n");
 			
 			System.out.println("Oprima 4 para , luego oprimir tecla Return: (e.g., 4):\n");
 			

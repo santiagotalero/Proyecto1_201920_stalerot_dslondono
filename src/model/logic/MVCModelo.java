@@ -47,12 +47,32 @@ public class MVCModelo {
 
 	//ALGORITMOS DE ORDENAMIENTO
 	
-	public void ordenarAscendentemente(int tipoEstructura)
+	public void ordenarAscendentementePorTiempoPromedio(int tipoEstructura)
 	{
 		
 	}
 	
-	public void ordenarDescendentemente(int tipoEstructura)
+	public void ordenarDescendentementPorTiempoPromedio(int tipoEstructura)
+	{
+		
+	}
+	
+	public void ordenarAscendentementePorZonaOrigen(int tipoEstructura)
+	{
+		
+	}
+	
+	public void ordenarDescendentementPorZonaOrigen(int tipoEstructura)
+	{
+		
+	}
+	
+	public void ordenarAscendentementePorZonaDestino(int tipoEstructura)
+	{
+		
+	}
+	
+	public void ordenarDescendentementPorZonaDestino(int tipoEstructura)
 	{
 		
 	}
@@ -302,13 +322,25 @@ public class MVCModelo {
 	
 	//REQUERIMIENTOS PARTE A
 	
-	public double[] req1A(int origen, int destino ,int mes)
+	public Stack req1A(int origen, int destino ,int mes)
 	{
-		double [] stats= new double[2];
+		Stack auxCumplen= new Stack();
 		
-		//Implementar
+		this.ordenarAscendentementePorTiempoPromedio(PILA_MES);;
 		
-		return stats;
+		Iterator iter= pilaMes.iterator();
+		
+		while(iter.hasNext())
+		{
+			Viaje actual= (Viaje) iter.next();
+			
+			if(actual.getSourceID()==origen && actual.getDstID()==destino && actual.getIdentificador()==mes)
+			{
+				auxCumplen.push(actual);
+			}	
+		}
+		
+			return auxCumplen;
 	}
 	
 
@@ -316,15 +348,70 @@ public class MVCModelo {
 	{
 		Stack aux= new Stack();
 		
+		this.ordenarDescendentementPorTiempoPromedio(PILA_MES);
+		
+		Iterator iter=pilaMes.iterator();
+		
+		while(iter.hasNext() && n>0)
+		{
+			Viaje actual= (Viaje) iter.next();
+			
+			if(actual.getIdentificador()==mes)
+			{
+				aux.push(actual);
+			}
+			n--;
+		}
+		
+		
 		return aux;
 	}
 
 
-	public Stack req3A(int mes, int zona, int zonaMayor, int zonaMenor)
+	public Object[] req3A(int mes, int zona, int zonaMayor, int zonaMenor)
 	{
-		Stack aux= new Stack();
+		Object[] arreglos= new Object[2];
 		
-		return aux;
+		int rango= zonaMayor-zonaMenor;
+		double[] opcionA= new double[rango];
+		double[]opcionB=new double[rango];
+		int i=0;
+		int j=0;
+		
+		while(zonaMenor<zonaMayor)
+		{
+			Viaje v1= buscarViajePila(mes, zona, zonaMenor);
+			
+			if(v1!=null)
+			{
+				opcionA[i]=v1.getMeanTravelTime();
+				i++;
+			}
+			else
+			{
+				opcionA[i]=-1;
+				i++;
+			}
+			
+			Viaje v2= buscarViajePila(mes, zonaMenor, zona);
+			
+			if(v2!=null)
+			{
+				opcionB[j]=v2.getMeanTravelTime();
+				j++;
+			}
+			else
+			{
+				opcionA[j]=-1;
+				j++;
+			}
+			
+			zonaMenor++;
+		}
+
+		arreglos[0]=opcionA;
+		arreglos[1]=opcionB;
+		return arreglos;
 	}
 
 	//REQUERIMIENTOS PARTE B
@@ -375,6 +462,27 @@ public class MVCModelo {
 		LinkedQueue aux= new LinkedQueue();
 		
 		return aux;
+	}
+	
+	public Viaje buscarViajePila(int mes, int zonaOrigen, int zonaDestino)
+	{
+		Viaje v=null;
+		
+		Iterator iter=pilaMes.iterator();
+		
+		while(iter.hasNext()&& v==null)
+		{
+			Viaje actual= (Viaje) iter.next();
+			
+			if(actual.getDstID()==zonaDestino&& actual.getIdentificador()==mes&&actual.getSourceID()==zonaOrigen)
+			{
+				v=actual;
+			}
+		}
+		
+		
+		return v;
+		
 	}
 
 }
