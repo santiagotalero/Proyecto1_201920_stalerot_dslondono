@@ -344,7 +344,7 @@ public class MVCModelo {
 	}
 	
 
-	public Stack  req2A(int n, int mes)
+	public Stack req2A(int n, int mes)
 	{
 		Stack aux= new Stack();
 		
@@ -416,27 +416,93 @@ public class MVCModelo {
 
 	//REQUERIMIENTOS PARTE B
 
-	public double[] req1B(int origen, int destino, int dia)
-	{
-		double [] stats= new double[2];
-
-		//Implementar
-
-		return stats;
-	}
-
-	public Queue  req2B(int n, int dia)
+	public Queue req1B(int origen, int destino, int dia)
 	{
 		Queue aux= new Queue();
+		this.ordenarAscendentementePorTiempoPromedio(COLA_DIA);
+		
+		Iterator iter = colaDia.iterator();
+		
+		while( iter.hasNext()) 
+		{
+			Viaje actual = (Viaje) iter.next();
+			
+			if( actual.getSourceID() == origen && actual.getDstID() == destino && actual.getIdentificador() == dia ) 
+			{
+				aux.enqueue(actual);
+			}
+		}
 		
 		return aux;
 	}
-
-	public Queue req3B(int dia, int zona, int zonaMayor, int zonaMenor)
+	
+	public Queue req2B(int dia)
 	{
-		Queue aux= new Queue();
+		Queue retorno = new Queue<>();
 		
-		return aux;
+		this.ordenarAscendentementePorTiempoPromedio(COLA_DIA);
+		Iterator iter = colaDia.iterator();
+		
+		while(iter.hasNext()) 
+		{
+			Viaje viajeDia = (Viaje)iter.next();
+			if( viajeDia.getIdentificador() == dia) 
+			{
+				retorno.enqueue(viajeDia.getSourceID());
+				retorno.enqueue(viajeDia.getDstID());
+				retorno.enqueue(viajeDia.getMeanTravelTime());
+				retorno.enqueue(viajeDia.getStandardDeviationTravelTime());
+			}
+		}
+
+
+		return retorno;
+	}
+
+	public Object[] req3B(int dia, int zona, int zonaMayor, int zonaMenor)
+	{
+		Object[] arreglos= new Object[2];
+		
+		int rango= zonaMayor-zonaMenor;
+		double[] opcionA= new double[rango];
+		double[] opcionB= new double[rango];
+		int i=0;
+		int j=0;
+		
+		while(zonaMenor<zonaMayor)
+		{
+			Viaje v1= buscarViajeCola(dia, zona, zonaMenor);
+			
+			if(v1!=null)
+			{
+				opcionA[i]=v1.getMeanTravelTime();
+				i++;
+			}
+			else
+			{
+				opcionA[i]=-1;
+				i++;
+			}
+			
+			Viaje v2= buscarViajeCola(dia, zonaMenor, zona);
+			
+			if(v2!=null)
+			{
+				opcionB[j]=v2.getMeanTravelTime();
+				j++;
+			}
+			else
+			{
+				opcionA[j]=-1;
+				j++;
+			}
+			
+			zonaMenor++;
+		}
+
+		arreglos[0]=opcionA;
+		arreglos[1]=opcionB;
+		return arreglos;
 	}
 	
 	
@@ -484,5 +550,23 @@ public class MVCModelo {
 		return v;
 		
 	}
+	
+	public Viaje buscarViajeCola( int dia, int zonaOrigen, int zonaDestino) 
+	{
+		Viaje retorno = null;
+		Iterator iter = colaDia.iterator();
+		
+		while( iter.hasNext() ) 
+		{
+			Viaje x = (Viaje) iter.next();
+			if( x.getDstID() == zonaOrigen && x.getSourceID() == zonaOrigen && x.getIdentificador() == dia) 
+			{
+				retorno = x; 
+			}
+		}
+		
+		return retorno; 
+	}
 
 }
+
