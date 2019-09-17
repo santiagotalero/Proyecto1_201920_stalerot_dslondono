@@ -23,7 +23,7 @@ public class MVCModelo {
 	//CONSTANTES QUE REPRESENTAN CADA ESTRUCTURA DE DATOS
 	
 	private final static int LISTA_HORA=1;
-	private final static int PILA_MES=2;
+	private final static int LISTA_MES=2;
 	private final static int COLA_DIA=3;
 	
 	
@@ -31,8 +31,8 @@ public class MVCModelo {
 	 * Atributos del modelo del mundo
 	 */
 	private LinkedQueue listaHora;
-	private Stack pilaMes;
-	private Queue colaDia;
+	private LinkedQueue listaMes;
+	private LinkedQueue listaDia;
 	
 	/**
 	 * Constructor del modelo del mundo con capacidad predefinida
@@ -40,8 +40,8 @@ public class MVCModelo {
 	public MVCModelo()
 	{
 		listaHora = new LinkedQueue();
-		pilaMes= new Stack();
-		colaDia= new Queue();
+		listaMes= new LinkedQueue();
+		listaDia= new LinkedQueue();
 	}
 
 
@@ -80,9 +80,9 @@ public class MVCModelo {
 	
 	//METODOS PARA USAR EN CARGA DE ARCHIVO
 	
-	public Stack viajesMes()
+	public LinkedQueue viajesMes()
 	{
-		return pilaMes;
+		return listaMes;
 	}
 	
 
@@ -94,9 +94,9 @@ public class MVCModelo {
 	
 
 
-	public Queue viajesDia()
+	public LinkedQueue viajesDia()
 	{
-		return colaDia;
+		return listaDia;
 	}
 	
 	public int zonaMenor()
@@ -125,7 +125,7 @@ public class MVCModelo {
 			}
 		}
 		
-		Iterator iter2= pilaMes.iterator();
+		Iterator iter2= listaMes.iterator();
 		while(iter2.hasNext())
 		{
 			Viaje actual= (Viaje)iter2.next();
@@ -147,7 +147,7 @@ public class MVCModelo {
 			}
 		}
 		
-		Iterator iter3= colaDia.iterator();
+		Iterator iter3= listaDia.iterator();
 		while(iter3.hasNext())
 		{
 			Viaje actual= (Viaje)iter3.next();
@@ -198,7 +198,7 @@ public class MVCModelo {
 			}
 		}
 		
-		Iterator iter2= pilaMes.iterator();
+		Iterator iter2= listaMes.iterator();
 		while(iter2.hasNext())
 		{
 			Viaje actual= (Viaje)iter2.next();
@@ -220,7 +220,7 @@ public class MVCModelo {
 			}
 		}
 		
-		Iterator iter3= colaDia.iterator();
+		Iterator iter3= listaDia.iterator();
 		while(iter3.hasNext())
 		{
 			Viaje actual= (Viaje)iter3.next();
@@ -257,10 +257,18 @@ public class MVCModelo {
 			
 			reader.readNext();
 
-			for(String[] nextLine : reader)
+			//for(String[] nextLine : reader)
 			{
+				//Viaje actual= new Viaje(Integer.parseInt(nextLine[0]),Integer.parseInt(nextLine[1]),Integer.parseInt(nextLine[2]),Double.parseDouble(nextLine[3]),Double.parseDouble(nextLine[4]),Double.parseDouble(nextLine[5]),Double.parseDouble(nextLine[6]));
+				//listaHora.agregar(actual);
+			}
+			int i=1;
+			while(i<40)
+			{
+				String [] nextLine= reader.readNext();
 				Viaje actual= new Viaje(Integer.parseInt(nextLine[0]),Integer.parseInt(nextLine[1]),Integer.parseInt(nextLine[2]),Double.parseDouble(nextLine[3]),Double.parseDouble(nextLine[4]),Double.parseDouble(nextLine[5]),Double.parseDouble(nextLine[6]));
 				listaHora.agregar(actual);
+				i++;
 			}
 
 		} 
@@ -275,10 +283,18 @@ public class MVCModelo {
 			
 			reader.readNext();
 
-			for(String[] nextLine : reader)
+			//for(String[] nextLine : reader)
 			{
+				//Viaje actual= new Viaje(Integer.parseInt(nextLine[0]),Integer.parseInt(nextLine[1]),Integer.parseInt(nextLine[2]),Double.parseDouble(nextLine[3]),Double.parseDouble(nextLine[4]),Double.parseDouble(nextLine[5]),Double.parseDouble(nextLine[6]));
+				//listaMes.agregar(actual);
+			}
+			int i=1;
+			while(i<40)
+			{
+				String [] nextLine= reader.readNext();
 				Viaje actual= new Viaje(Integer.parseInt(nextLine[0]),Integer.parseInt(nextLine[1]),Integer.parseInt(nextLine[2]),Double.parseDouble(nextLine[3]),Double.parseDouble(nextLine[4]),Double.parseDouble(nextLine[5]),Double.parseDouble(nextLine[6]));
-				pilaMes.push(actual);
+				listaMes.agregar(actual);
+				i++;
 			}
 
 		} 
@@ -294,10 +310,18 @@ public class MVCModelo {
 			reader.readNext();
 
 			
-			for(String[] nextLine : reader)
+			//for(String[] nextLine : reader)
 			{
+				//Viaje actual= new Viaje(Integer.parseInt(nextLine[0]),Integer.parseInt(nextLine[1]),Integer.parseInt(nextLine[2]),Double.parseDouble(nextLine[3]),Double.parseDouble(nextLine[4]),Double.parseDouble(nextLine[5]),Double.parseDouble(nextLine[6]));
+				//colaDia.enqueue(actual);
+			}
+			int i=1;
+			while(i<40)
+			{
+				String [] nextLine= reader.readNext();
 				Viaje actual= new Viaje(Integer.parseInt(nextLine[0]),Integer.parseInt(nextLine[1]),Integer.parseInt(nextLine[2]),Double.parseDouble(nextLine[3]),Double.parseDouble(nextLine[4]),Double.parseDouble(nextLine[5]),Double.parseDouble(nextLine[6]));
-				colaDia.enqueue(actual);
+				listaDia.agregar(actual);
+				i++;
 			}
 
 		} 
@@ -322,13 +346,14 @@ public class MVCModelo {
 	
 	//REQUERIMIENTOS PARTE A
 	
-	public Stack req1A(int origen, int destino ,int mes)
+	public LinkedQueue req1A(int origen, int destino ,int mes)
 	{
-		Stack auxCumplen= new Stack();
 		
-		this.ordenarAscendentementePorTiempoPromedio(PILA_MES);;
+		LinkedQueue auxCumplen= new LinkedQueue();
 		
-		Iterator iter= pilaMes.iterator();
+		//this.ordenarAscendentementePorTiempoPromedio(PILA_MES);;
+		
+		Iterator iter= listaMes.iterator();
 		
 		while(iter.hasNext())
 		{
@@ -336,7 +361,7 @@ public class MVCModelo {
 			
 			if(actual.getSourceID()==origen && actual.getDstID()==destino && actual.getIdentificador()==mes)
 			{
-				auxCumplen.push(actual);
+				auxCumplen.agregar(actual);
 			}	
 		}
 		
@@ -344,13 +369,13 @@ public class MVCModelo {
 	}
 	
 
-	public Stack  req2A(int n, int mes)
+	public LinkedQueue  req2A(int n, int mes)
 	{
-		Stack aux= new Stack();
+		LinkedQueue aux= new LinkedQueue();
 		
-		this.ordenarDescendentementPorTiempoPromedio(PILA_MES);
+		//this.ordenarDescendentementPorTiempoPromedio(PILA_MES);
 		
-		Iterator iter=pilaMes.iterator();
+		Iterator iter=listaMes.iterator();
 		
 		while(iter.hasNext() && n>0)
 		{
@@ -358,9 +383,10 @@ public class MVCModelo {
 			
 			if(actual.getIdentificador()==mes)
 			{
-				aux.push(actual);
+				aux.agregar(actual);
+				n--;
 			}
-			n--;
+			
 		}
 		
 		
@@ -370,18 +396,18 @@ public class MVCModelo {
 
 	public Object[] req3A(int mes, int zona, int zonaMayor, int zonaMenor)
 	{
+		//this.ordenarAscendentementePorZonaOrigen(LISTA_MES);
 		Object[] arreglos= new Object[2];
 		
-		int rango= zonaMayor-zonaMenor;
+		int rango= zonaMayor-zonaMenor+1;
 		double[] opcionA= new double[rango];
 		double[]opcionB=new double[rango];
 		int i=0;
 		int j=0;
 		
-		while(zonaMenor<zonaMayor)
+		while(zonaMenor<=zonaMayor)
 		{
 			Viaje v1= buscarViajePila(mes, zona, zonaMenor);
-			
 			if(v1!=null)
 			{
 				opcionA[i]=v1.getMeanTravelTime();
@@ -402,7 +428,7 @@ public class MVCModelo {
 			}
 			else
 			{
-				opcionA[j]=-1;
+				opcionB[j]=-1;
 				j++;
 			}
 			
@@ -454,6 +480,23 @@ public class MVCModelo {
 	{
 		LinkedQueue aux= new LinkedQueue();
 		
+		//this.ordenarDescendentementPorTiempoPromedio(listaHora);
+		
+		Iterator iter=listaHora.iterator();
+		
+		while(iter.hasNext() && n>0)
+		{
+			Viaje actual= (Viaje) iter.next();
+			
+			if(actual.getIdentificador()==hora)
+			{
+				aux.agregar(actual);
+				n--;
+			}
+			
+		}
+		
+		
 		return aux;
 	}
 	
@@ -464,11 +507,13 @@ public class MVCModelo {
 		return aux;
 	}
 	
+	
+	//Métodos auxiliares
 	public Viaje buscarViajePila(int mes, int zonaOrigen, int zonaDestino)
 	{
 		Viaje v=null;
 		
-		Iterator iter=pilaMes.iterator();
+		Iterator iter=listaMes.iterator();
 		
 		while(iter.hasNext()&& v==null)
 		{

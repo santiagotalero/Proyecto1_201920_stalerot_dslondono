@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.Iterator;
 import java.util.Scanner;
 
+import model.data_structures.LinkedQueue;
 import model.data_structures.Stack;
 import model.logic.MVCModelo;
 import model.logic.Viaje;
@@ -103,7 +104,7 @@ public class Controller {
 				System.out.println("Ingrese una zona de destino dada");
 				int zdd2= lector.nextInt();
 				
-				Stack aux2= modelo.req1A(zdo2, zdd2, mes2);
+				LinkedQueue aux2= modelo.req1A(zdo2, zdd2, mes2);
 				
 				System.out.println("Los datos obtenidos con las parametros ingresados son:");
 				
@@ -125,7 +126,7 @@ public class Controller {
 				System.out.println("Ingrese el número de mes");
 				int mes3=lector.nextInt();
 				
-				Stack aux3= modelo.req2A(n3, mes3);
+				LinkedQueue aux3= modelo.req2A(n3, mes3);
 				
 				Iterator iter3= aux3.iterator();
 				
@@ -164,6 +165,7 @@ public class Controller {
 				
 				while(i<a.length)
 				{
+					
 					String texto=null;
 					String texto2=null;
 					if(a[i]==-1)
@@ -183,7 +185,8 @@ public class Controller {
 						texto2=Double.toString(b[i]);
 					}
 					
-					System.out.println(texto+"de"+ zona4 +" a "+ (zonaMenor+i)+ " vs "+ texto2+" de "+ (zonaMenor+i)+ " a "+ zona4);
+					System.out.println(texto+" de "+ zona4 +" a "+ (zonaMenor+i)+ " vs "+ texto2+" de "+ (zonaMenor+i)+ " a "+ zona4);
+					i++;
 				}
 
 
