@@ -369,11 +369,8 @@ public class MVCModelo {
 	}
 	
 
-<<<<<<< HEAD
-	public LinkedQueue  req2A(int n, int mes)
-=======
-	public Stack req2A(int n, int mes)
->>>>>>> 0942914990079763a3875d85857a4ef73a5ec642
+
+	public LinkedQueue req2A(int n, int mes)
 	{
 		LinkedQueue aux= new LinkedQueue();
 		
@@ -603,7 +600,7 @@ public class MVCModelo {
 	public Viaje buscarViajeCola( int dia, int zonaOrigen, int zonaDestino) 
 	{
 		Viaje retorno = null;
-		Iterator iter = colaDia.iterator();
+		Iterator iter = listaDia.iterator();
 		
 		while( iter.hasNext() ) 
 		{
