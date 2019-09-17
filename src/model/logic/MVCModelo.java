@@ -47,10 +47,71 @@ public class MVCModelo {
 
 	//ALGORITMOS DE ORDENAMIENTO
 	
-	public void ordenarAscendentementePorTiempoPromedio(int tipoEstructura)
+	
+	
+	//Auxiliar
+	public double[] darArregloTiempoPromedio() 
 	{
+		double[] x = new double[listaMes.size()];
+		Iterator iter = listaMes.iterator();
+		int i = 0; 
+		while( iter.hasNext()) 
+		{
+			Viaje actual = (Viaje) iter.next();
+			double tiempo = actual.getMeanTravelTime();
+			x[i] = tiempo; 
+			i++; 
+		}
+		
+		return x; 
+	}
+	
+	public void ordenarAscendentementePorTiempoPromedio( )
+	{
+		double[] arr = darArregloTiempoPromedio();
+		int low = (int)arr[0];
+		int high = (int)arr[arr.length-1 ];
+		if( low < high) 
+		{
+			double pi = partition();
+			
+			ordenarAscendentementePorTiempoPromedio( );
+			ordenarAscendentementePorTiempoPromedio( );
+		}		
 		
 	}
+	
+	//Metodo auxiliar quicksort
+		public double partition() 
+		{
+			double[] arr = darArregloTiempoPromedio();
+			int low = (int)arr[0];
+			int high = (int)arr[arr.length-1 ];
+
+			int pivot = (int)arr[high];
+			int i = low - 1; 
+			
+			for( int j = low; j <= high -1; j++ ) 
+			{
+				if( arr[j] <= pivot ) 
+				{
+					i++;
+					
+					double var = arr[i];
+					arr[i] = arr[j];
+					arr[j] = var;
+				}
+			}
+			
+			double var = arr[ i+1 ];
+			arr[i+1] = arr[high];
+			arr[high] = var; 
+			
+			return i + 1;
+			
+			
+		}
+		
 	
 	public void ordenarDescendentementPorTiempoPromedio(int tipoEstructura)
 	{
@@ -448,7 +509,7 @@ public class MVCModelo {
 		Queue aux= new Queue();
 		this.ordenarAscendentementePorTiempoPromedio(COLA_DIA);
 		
-		Iterator iter = colaDia.iterator();
+		Iterator iter = listaDia.iterator();
 		
 		while( iter.hasNext()) 
 		{
@@ -468,7 +529,7 @@ public class MVCModelo {
 		Queue retorno = new Queue<>();
 		
 		this.ordenarAscendentementePorTiempoPromedio(COLA_DIA);
-		Iterator iter = colaDia.iterator();
+		Iterator iter = listaDia.iterator();
 		
 		while(iter.hasNext()) 
 		{
