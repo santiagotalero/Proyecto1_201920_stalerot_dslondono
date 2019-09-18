@@ -4,6 +4,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Iterator;
+import java.util.*;
 
 import com.opencsv.CSVReader;
 
@@ -34,6 +35,7 @@ public class MVCModelo {
 	private LinkedQueue listaMes;
 	private LinkedQueue listaDia;
 	
+	
 	/**
 	 * Constructor del modelo del mundo con capacidad predefinida
 	 */
@@ -42,6 +44,7 @@ public class MVCModelo {
 		listaHora = new LinkedQueue();
 		listaMes= new LinkedQueue();
 		listaDia= new LinkedQueue();
+		
 	}
 
 
@@ -49,7 +52,6 @@ public class MVCModelo {
 	
 	
 	
-	//Auxiliar
 	public double[] darArregloTiempoPromedio() 
 	{
 		double[] x = new double[listaMes.size()];
@@ -66,57 +68,111 @@ public class MVCModelo {
 		return x; 
 	}
 	
-	public void ordenarAscendentementePorTiempoPromedio( )
+	public int[] darArregloZonaOrigen() 
 	{
-		double[] arr = darArregloTiempoPromedio();
-		int low = (int)arr[0];
-		int high = (int)arr[arr.length-1 ];
-		if( low < high) 
+		int[] x = new int[listaMes.size()];
+		Iterator iter = listaMes.iterator();
+		int i = 0; 
+		while( iter.hasNext()) 
 		{
-			double pi = partition();
-			
-			ordenarAscendentementePorTiempoPromedio( );
-			ordenarAscendentementePorTiempoPromedio( );
-		}		
+			Viaje actual = (Viaje) iter.next();
+			int zonaOrigen = actual.getSourceID();
+			x[i] = zonaOrigen; 
+			i++; 
+		}
 		
+		return x; 
 	}
 	
-	//Metodo auxiliar quicksort
-		public double partition() 
+	
+	public int[] darArregloZonaDestino() 
+	{
+		int[] x = new int[listaMes.size()];
+		Iterator iter = listaMes.iterator();
+		int i = 0; 
+		while( iter.hasNext()) 
 		{
-			double[] arr = darArregloTiempoPromedio();
-			int low = (int)arr[0];
-			int high = (int)arr[arr.length-1 ];
-
-			int pivot = (int)arr[high];
-			int i = low - 1; 
-			
-			for( int j = low; j <= high -1; j++ ) 
+			Viaje actual = (Viaje)listaMes.iterator();
+			int zonaDestino = actual.getDstID();
+			x[i] = zonaDestino;
+			i++;
+		}
+		
+		return x; 
+	}
+	
+	public static void quicksort( int[] array) 
+	{
+		quicksort(array, 0, array.length -1 );
+	}
+	
+	public static void quicksort(int[] array, int left, int right) 
+	{
+		if( left >= right) 
+		{
+			return; 
+		}
+		
+		int pivot = array[(left+right)/2];
+		int index = partition(array,left,right,pivot);
+		quicksort(array, left, index - 1);
+		quicksort(array, index, right);
+	}
+	
+	public static int partition( int[] array, int left, int right, int pivot ) 
+	{
+		while( left <= right ) 
+		{
+			while( array[left] < pivot ) 
 			{
-				if( arr[j] <= pivot ) 
-				{
-					i++;
-					
-					double var = arr[i];
-					arr[i] = arr[j];
-					arr[j] = var;
-				}
+				left++;
 			}
 			
-			double var = arr[ i+1 ];
-			arr[i+1] = arr[high];
-			arr[high] = var; 
+			while( array[right] > pivot) 
+			{
+				right--; 
+			}
 			
-			return i + 1;
-			
-			
+			if( left <= right ) 
+			{
+				swap(array, left, right);
+				left++;
+				right--;
+			}
 		}
+		
+		return left; 
+	}
+	
+	
+	
+	
+	
+	
+	private static void swap(int[] array, int left, int right) 
+	{
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	public void ordenarAscendentementePorTiempoPromedio( )
+	{
+
+	}
+	
+	
+	
+	
 		
 	
 	public void ordenarDescendentementPorTiempoPromedio(int tipoEstructura)
 	{
 		
 	}
+	
+	
+
 	
 	public void ordenarAscendentementePorZonaOrigen(int tipoEstructura)
 	{
