@@ -4,7 +4,6 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Iterator;
-import java.util.*;
 
 import com.opencsv.CSVReader;
 
@@ -101,6 +100,7 @@ public class MVCModelo {
 		return x; 
 	}
 	
+	//Quicksort ascendentemente
 	public static void quicksort( int[] array) 
 	{
 		quicksort(array, 0, array.length -1 );
@@ -144,55 +144,62 @@ public class MVCModelo {
 		return left; 
 	}
 	
-	
-	
-	
-	
-	
-	private static void swap(int[] array, int left, int right) 
+
+	public static void swap(int[] array, int left, int right) 
 	{
-		// TODO Auto-generated method stub
+	
+	/////Implementar	
 		
+	}
+	
+	
+	//Quicksort para ordenamiento descendente
+	
+	public static void quicksortDes( int[] array) 
+	{
+		quicksort(array, 0, array.length -1 );
+	}
+	
+	public static void quicksortDes(int[] array, int left, int right) 
+	{
+		if( right >= left) 
+		{
+			return; 
+		}
+		
+		int pivot = array[(left+right)/2];
+		int index = partitionDes(array,right,left,pivot);
+		quicksortDes(array, right, index - 1);
+		quicksortDes(array, index, left);
+	}
+	
+	
+	public static int partitionDes( int[] array, int left, int right, int pivot ) 
+	{
+		while( right <= left ) 
+		{
+			while( array[right] < pivot ) 
+			{
+				right++;
+			}
+			
+			while( array[left] > pivot) 
+			{
+				left--; 
+			}
+			
+			if( right <= left ) 
+			{
+				swap(array, left, right);
+				right++;
+				left--;
+			}
+		}
+		
+		return right; 
 	}
 
-
-	public void ordenarAscendentementePorTiempoPromedio( )
-	{
-
-	}
 	
-	
-	
-	
-		
-	
-	public void ordenarDescendentementPorTiempoPromedio(int tipoEstructura)
-	{
-		
-	}
-	
-	
-
-	
-	public void ordenarAscendentementePorZonaOrigen(int tipoEstructura)
-	{
-		
-	}
-	
-	public void ordenarDescendentementPorZonaOrigen(int tipoEstructura)
-	{
-		
-	}
-	
-	public void ordenarAscendentementePorZonaDestino(int tipoEstructura)
-	{
-		
-	}
-	
-	public void ordenarDescendentementPorZonaDestino(int tipoEstructura)
-	{
-		
-	}
 	
 	
 	//METODOS PARA USAR EN CARGA DE ARCHIVO
@@ -563,7 +570,7 @@ public class MVCModelo {
 	public Queue req1B(int origen, int destino, int dia)
 	{
 		Queue aux= new Queue();
-		this.ordenarAscendentementePorTiempoPromedio(COLA_DIA);
+		//this.ordenarAscendentementePorTiempoPromedio(COLA_DIA);
 		
 		Iterator iter = listaDia.iterator();
 		
@@ -584,7 +591,7 @@ public class MVCModelo {
 	{
 		Queue retorno = new Queue<>();
 		
-		this.ordenarAscendentementePorTiempoPromedio(COLA_DIA);
+		//this.ordenarAscendentementePorTiempoPromedio(COLA_DIA);
 		Iterator iter = listaDia.iterator();
 		
 		while(iter.hasNext()) 
