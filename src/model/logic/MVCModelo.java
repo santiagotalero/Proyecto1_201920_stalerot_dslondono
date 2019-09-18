@@ -504,7 +504,7 @@ public class MVCModelo {
 	{
 		LinkedQueue aux= new LinkedQueue();
 		
-		this.ordenarDescendentementPorTiempoPromedio(LISTA_MES);
+		quicksortDes(listaMes.toIntArray());
 		
 		Iterator iter=listaMes.iterator();
 		
@@ -525,10 +525,7 @@ public class MVCModelo {
 	}
 
 
-	private void ordenarDescendentementPorTiempoPromedio(int listaMes2) {
-		// TODO Auto-generated method stub
-		
-	}
+
 
 
 	public Object[] req3A(int mes, int zona, int zonaMayor, int zonaMenor)
@@ -583,7 +580,7 @@ public class MVCModelo {
 
 		LinkedQueue aux= new LinkedQueue();
 
-		this.ordenarAscendentementePorTiempoPromedio(COLA_DIA);
+		quicksort(listaDia.toIntArray());
 
 		
 		Iterator iter = listaDia.iterator();
@@ -600,19 +597,14 @@ public class MVCModelo {
 		
 		return aux;
 	}
-	
-	private void ordenarAscendentementePorTiempoPromedio(int colaDia) {
-		// TODO Auto-generated method stub
-		
-	}
 
 
 	public LinkedQueue req2B(int n, int dia)
 	{
 		LinkedQueue aux= new LinkedQueue();
 		
+		quicksort(listaDia.toIntArray());
 
-		this.ordenarAscendentementePorTiempoPromedio(COLA_DIA);
 		Iterator iter = listaDia.iterator();
 
 		
@@ -706,7 +698,8 @@ public class MVCModelo {
 	{
 		LinkedQueue aux= new LinkedQueue();
 		
-		this.ordenarDescendentementPorTiempoPromedio(LISTA_HORA);
+		quicksortDes(listaHora.toIntArray());
+		
 		
 		Iterator iter=listaHora.iterator();
 		
@@ -728,7 +721,7 @@ public class MVCModelo {
 	
 	public LinkedQueue req3C(int zonaOrigen, int zonaDestino)
 	{
-		this.ordenarAscendentementePorHora(LISTA_HORA);
+		quicksortDes(listaHora.toIntArray());
 		
 		LinkedQueue aux= new LinkedQueue();
 		
