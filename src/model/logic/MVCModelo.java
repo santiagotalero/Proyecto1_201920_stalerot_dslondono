@@ -146,17 +146,21 @@ public class MVCModelo {
 	
 
 
-	public void ordenarAscendentementePorHora(int listaHora2) {
-		// TODO Auto-generated method stub
-		
-	}
+
 
 
 
 	public static void swap(int[] array, int left, int right) 
 	{
-	
-	/////Implementar	
+		for( int i = left; i < array.length; i++) 
+		{
+			for( int j = right; j < array.length; j--  ) 
+			{
+				array[j] = i; 
+				array[i] = j; 
+			}
+		}
+		
 		
 	}
 	
