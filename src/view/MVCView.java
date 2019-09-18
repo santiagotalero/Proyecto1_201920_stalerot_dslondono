@@ -28,19 +28,19 @@ public class MVCView
 			
 			System.out.println("Oprima 3 para realizar una consulta de los n viajes con mayor tiempo promedio de un mes dado, luego oprimir tecla Return: (e.g., 3):\n");
 			
-			System.out.println("Oprima 4 para , luego oprimir tecla Return: (e.g., 4):\n");
+			System.out.println("Oprima 4  para realizar una cosulta de req 3A , luego oprimir tecla Return: (e.g., 4):\n");
 			
-			System.out.println("Oprima 5 para , luego oprimir tecla Return: (e.g., 5):\n");
+			System.out.println("Oprima 5 para  realizar una consulta de req 1B, luego oprimir tecla Return: (e.g., 5):\n");
 			
-			System.out.println("Oprima 6 para , luego oprimir tecla Return: (e.g., 6):\n");
+			System.out.println("Oprima 6 para realizar una consulta de req 2B, luego oprimir tecla Return: (e.g., 6):\n");
 			
-			System.out.println("Oprima 7 para , luego oprimir tecla Return: (e.g., 7):\n");
+			System.out.println("Oprima 7 para realizar una consulta de 3B , luego oprimir tecla Return: (e.g., 7):\n");
 			
-			System.out.println("Oprima 8 para , luego oprimir tecla Return: (e.g., 8):\n");
+			System.out.println("Oprima 8 para  realizar una consulta de 1C, luego oprimir tecla Return: (e.g., 8):\n");
 			
-			System.out.println("Oprima 9 para , luego oprimir tecla Return: (e.g., 9):\n");
+			System.out.println("Oprima 9 para realizar una consulta de 2C , luego oprimir tecla Return: (e.g., 9):\n");
 			
-			System.out.println("Oprima 10 para , luego oprimir tecla Return: (e.g., 10):\n");
+			System.out.println("Oprima 10 para realizar una consulta de 3C , luego oprimir tecla Return: (e.g., 10):\n");
 			
 			System.out.println("Oprima 11 para salir del programa , luego oprimir tecla Return: (e.g., 10):\n");
 
