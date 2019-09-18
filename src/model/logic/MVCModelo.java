@@ -145,6 +145,14 @@ public class MVCModelo {
 	}
 	
 
+
+	public void ordenarAscendentementePorHora(int listaHora2) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+
 	public static void swap(int[] array, int left, int right) 
 	{
 	
@@ -475,8 +483,6 @@ public class MVCModelo {
 		
 		LinkedQueue auxCumplen= new LinkedQueue();
 		
-		//this.ordenarAscendentementePorTiempoPromedio(PILA_MES);;
-		
 		Iterator iter= listaMes.iterator();
 		
 		while(iter.hasNext())
@@ -498,7 +504,7 @@ public class MVCModelo {
 	{
 		LinkedQueue aux= new LinkedQueue();
 		
-		//this.ordenarDescendentementPorTiempoPromedio(PILA_MES);
+		this.ordenarDescendentementPorTiempoPromedio(LISTA_MES);
 		
 		Iterator iter=listaMes.iterator();
 		
@@ -519,9 +525,14 @@ public class MVCModelo {
 	}
 
 
+	private void ordenarDescendentementPorTiempoPromedio(int listaMes2) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
 	public Object[] req3A(int mes, int zona, int zonaMayor, int zonaMenor)
 	{
-		//this.ordenarAscendentementePorZonaOrigen(LISTA_MES);
 		Object[] arreglos= new Object[2];
 		
 		int rango= zonaMayor-zonaMenor+1;
@@ -567,10 +578,13 @@ public class MVCModelo {
 
 	//REQUERIMIENTOS PARTE B
 
-	public Queue req1B(int origen, int destino, int dia)
+	public LinkedQueue req1B(int origen, int destino, int dia)
 	{
-		Queue aux= new Queue();
-		//this.ordenarAscendentementePorTiempoPromedio(COLA_DIA);
+
+		LinkedQueue aux= new LinkedQueue();
+
+		this.ordenarAscendentementePorTiempoPromedio(COLA_DIA);
+
 		
 		Iterator iter = listaDia.iterator();
 		
@@ -580,50 +594,58 @@ public class MVCModelo {
 			
 			if( actual.getSourceID() == origen && actual.getDstID() == destino && actual.getIdentificador() == dia ) 
 			{
-				aux.enqueue(actual);
+				aux.agregar(actual);
 			}
 		}
 		
 		return aux;
 	}
 	
-	public Queue req2B(int dia)
+	private void ordenarAscendentementePorTiempoPromedio(int colaDia) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	public LinkedQueue req2B(int n, int dia)
 	{
-		Queue retorno = new Queue<>();
+		LinkedQueue aux= new LinkedQueue();
 		
-		//this.ordenarAscendentementePorTiempoPromedio(COLA_DIA);
+
+		this.ordenarAscendentementePorTiempoPromedio(COLA_DIA);
 		Iterator iter = listaDia.iterator();
+
 		
-		while(iter.hasNext()) 
+		while(iter.hasNext() && n>0)
 		{
-			Viaje viajeDia = (Viaje)iter.next();
-			if( viajeDia.getIdentificador() == dia) 
+			Viaje actual= (Viaje) iter.next();
+			
+			if(actual.getIdentificador()==dia)
 			{
-				retorno.enqueue(viajeDia.getSourceID());
-				retorno.enqueue(viajeDia.getDstID());
-				retorno.enqueue(viajeDia.getMeanTravelTime());
-				retorno.enqueue(viajeDia.getStandardDeviationTravelTime());
+				aux.agregar(actual);
+				n--;
 			}
+			
 		}
+		
+		
+		return aux;
 
-
-		return retorno;
 	}
 
 	public Object[] req3B(int dia, int zona, int zonaMayor, int zonaMenor)
 	{
 		Object[] arreglos= new Object[2];
 		
-		int rango= zonaMayor-zonaMenor;
+		int rango= zonaMayor-zonaMenor+1;
 		double[] opcionA= new double[rango];
-		double[] opcionB= new double[rango];
+		double[]opcionB=new double[rango];
 		int i=0;
 		int j=0;
 		
-		while(zonaMenor<zonaMayor)
+		while(zonaMenor<=zonaMayor)
 		{
 			Viaje v1= buscarViajeCola(dia, zona, zonaMenor);
-			
 			if(v1!=null)
 			{
 				opcionA[i]=v1.getMeanTravelTime();
@@ -644,7 +666,7 @@ public class MVCModelo {
 			}
 			else
 			{
-				opcionA[j]=-1;
+				opcionB[j]=-1;
 				j++;
 			}
 			
@@ -659,9 +681,22 @@ public class MVCModelo {
 	
 	//REQUERIMIENTOS PARTE C
 	
-	public LinkedQueue req1C(int horaInicial, int horaFinal)
+	public LinkedQueue req1C(int zonaOrigen, int zonaDestino,int horaInicial, int horaFinal)
 	{
 		LinkedQueue aux= new LinkedQueue();
+		
+		Iterator iter=listaHora.iterator();
+		
+		while(iter.hasNext() && horaInicial<=horaFinal)
+		{
+			Viaje actual=(Viaje)iter.next();
+			
+			if(actual.getSourceID()==zonaOrigen && actual.getDstID()==zonaDestino && actual.getIdentificador()==horaInicial)
+			{
+				aux.agregar(actual);
+				horaInicial++;
+			}
+		}
 		
 		return aux;
 	}
@@ -671,7 +706,7 @@ public class MVCModelo {
 	{
 		LinkedQueue aux= new LinkedQueue();
 		
-		//this.ordenarDescendentementPorTiempoPromedio(listaHora);
+		this.ordenarDescendentementPorTiempoPromedio(LISTA_HORA);
 		
 		Iterator iter=listaHora.iterator();
 		
@@ -693,12 +728,31 @@ public class MVCModelo {
 	
 	public LinkedQueue req3C(int zonaOrigen, int zonaDestino)
 	{
+		this.ordenarAscendentementePorHora(LISTA_HORA);
+		
 		LinkedQueue aux= new LinkedQueue();
+		
+		Iterator iter= listaHora.iterator();
+		
+		while(iter.hasNext())
+		{
+			Viaje actual= (Viaje) iter.next();
+			
+			if(actual.getSourceID()==zonaOrigen && actual.getDstID()==zonaDestino)
+			{
+				aux.agregar(actual);
+			}
+		}
+		
+		
 		
 		return aux;
 	}
 	
 	
+	
+
+
 	//Métodos auxiliares
 	public Viaje buscarViajePila(int mes, int zonaOrigen, int zonaDestino)
 	{
@@ -723,20 +777,21 @@ public class MVCModelo {
 	
 	public Viaje buscarViajeCola( int dia, int zonaOrigen, int zonaDestino) 
 	{
-		Viaje retorno = null;
-		Iterator iter = listaDia.iterator();
+		Viaje v=null;
 		
-		while( iter.hasNext() ) 
+		Iterator iter=listaDia.iterator();
+		
+		while(iter.hasNext()&& v==null)
 		{
-			Viaje x = (Viaje) iter.next();
-			if( x.getDstID() == zonaOrigen && x.getSourceID() == zonaOrigen && x.getIdentificador() == dia) 
+			Viaje actual= (Viaje) iter.next();
+			
+			if(actual.getDstID()==zonaDestino&& actual.getIdentificador()==dia&&actual.getSourceID()==zonaOrigen)
 			{
-				retorno = x; 
+				v=actual;
 			}
 		}
 		
-		return retorno; 
+		
+		return v;
 	}
-
 }
-
